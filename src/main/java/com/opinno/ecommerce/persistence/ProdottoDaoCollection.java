@@ -12,6 +12,8 @@ public class ProdottoDaoCollection implements ProdottoDAO{
     Map<Long, Prodotto> mappaProdotti = new HashMap<>();
     @Override
     public Prodotto insert(Prodotto p) {
+
+        // da controllare
         mappaProdotti.put(p.getId(), p);
         return p;
     }
