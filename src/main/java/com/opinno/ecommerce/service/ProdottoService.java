@@ -41,16 +41,31 @@ public class ProdottoService {
 
     // TODO finire di scrivere i metodi
 
-    public boolean acquista(long id, int quantita){
-
-
-        Prodotto prodotto = dao.get(id);
-        if (prodotto.getQuantita() > quantita) {
-            prodotto.setQuantita(prodotto.getQuantita()-quantita);
-            return true;
+    // TODO fare versione acquista che prende in input un prodotto
+    public boolean acquista(long id, int quantita) throws RuntimeException{
+        if(quantita <= 0){
+            throw new RuntimeException("La quantità deve essere maggiore di zero");
         }
-        return false;
+        Prodotto prodotto = dao.get(id);
+        if(prodotto == null) {
+            throw new RuntimeException("Prodotto non trovato");
+        }
+
+        if (prodotto.getQuantita() <=  quantita) {
+            throw new RuntimeException("La quantità richiesta non è disponibile");
+        }
+        prodotto.setQuantita(prodotto.getQuantita()-quantita);
+        if(dao.update(prodotto) == null){
+            throw new RuntimeException("Impossibile acquistare il prodotto");
+        }
+        return true;
     }
+
+
+
+
+
+
 
     public boolean acquista(long id){
         // ogni volta che acquisto, ne acquisto solo 1 quantità
