@@ -1,12 +1,14 @@
 package com.opinno.ecommerce.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 
 public class Prodotto {
+    @NonNull
     long id;
     String nome;
     String descrizione;
